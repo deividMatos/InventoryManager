@@ -14,10 +14,13 @@ repositories {
 }
 
 dependencies {
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.9'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'com.h2database', name: 'h2', version: '2.1.214'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.7.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
 }
 
 test {

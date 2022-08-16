@@ -1,7 +1,8 @@
-package com.project.Controller;
+package com.project.person.Controller;
 
 import com.project.model.Person;
-import com.project.service.PersonService;
+import com.project.person.service.PersonService;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,8 @@ public class PersonController {
     }
 
     @PostMapping("/person/insert")
-    public Person getPerson(@ModelAttribute("person") Person person) {
+    @ResponseBody
+    public Person getPerson(@RequestBody final Person person) {
         return personService.insert(person);
     }
 

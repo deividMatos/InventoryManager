@@ -1,7 +1,7 @@
-package com.project.service;
+package com.project.person.service;
 
 import com.project.model.Person;
-import com.project.repository.PersonRepository;
+import com.project.person.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 @Service
 public class PersonService {
