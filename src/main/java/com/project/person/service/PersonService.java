@@ -2,10 +2,12 @@ package com.project.person.service;
 
 import com.project.model.Person;
 import com.project.person.repository.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
 public class PersonService {
 
+    @Autowired
     private final PersonRepository repository;
 
     public PersonService(PersonRepository repository) {
@@ -17,6 +19,7 @@ public class PersonService {
     }
 
     public Person insert(Person person){
+        System.out.println(person.toString());
         return repository.save (person);
     }
 
