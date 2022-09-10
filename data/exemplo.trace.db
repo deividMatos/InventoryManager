@@ -1088,3 +1088,6 @@ select product0_.productid as producti1_1_0_ from product product0_ where produc
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-09-10 17:30:01 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * [*]person"; SQL statement:
+select * person [42000-214]
