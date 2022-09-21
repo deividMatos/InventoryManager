@@ -2,7 +2,6 @@ package com.project.person.Controller;
 
 import com.project.model.Person;
 import com.project.person.service.PersonService;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
