@@ -2,51 +2,51 @@ package com.project.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date;
 
 @Entity
-@Table(name = "product")
-public class Product {
-
+@Table(name = "movement")
+public class Movement {
     @Id
     @Column(name = "id")
     @JsonProperty("id")
     private Long id;
 
-    @Column( name = "description")
-    @JsonProperty("description")
-    private String description;
-
-    @Column( name = "unit_measurement")
-    @JsonProperty("unit_measurement")
-    private String unitMeasurement;
-    
-    @Column( name = "date_creation")
+    @Column( name = "date_creation", nullable = false)
     @JsonProperty("date_creation")
     private Date dateCreation;
 
-    @Column( name = "date_updated")
-    @JsonProperty("date_updated")
-    private Date dateUpdated;
+    @Column( name = "quantity", nullable = false)
+    @JsonProperty("quantity")
+    private Long quantity;
+
+    @Column( name = "product_id", nullable = false)
+    @JsonProperty("product_id")
+    private Long productId;
 
     @Column( name = "person_creation_id", nullable = false)
     @JsonProperty("person_creation_id")
     private Long creationPersonId;
 
+    @Column( name = "movement_type_id", nullable = false)
+    @JsonProperty("movement_type_id")
+    private Long movementTypeId;
+
+
+
     @Override
     public String toString() {
-        return "Product{" +
+        return "MovementType{" +
                 "id=" + id +
-                ", description='" + description + '\'' +
-                ", unit_measurement='" + unitMeasurement + '\'' +
                 ", date_creation='" + dateCreation + '\'' +
-                ", date_updated='" + dateUpdated + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", product_id='" + productId + '\'' +
                 ", person_creation_id='" + creationPersonId + '\'' +
+                ", movement_type_id='" + movementTypeId + '\'' +
                 '}';
     }
 }
