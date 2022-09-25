@@ -15,18 +15,19 @@ public class Product {
     @Column(name = "productid")
     private Long id;
 
-    @Column( name = "description")
+    @Column(name = "description")
     private String description;
 
-    @Column( name = "unit_measurement")
+    @Column(name = "unit_measurement")
     private String unitMeasurement;
-    
-    @Column( name = "date_created")
+
+    @Column(name = "date_created")
     private Date dateCreated;
 
-    @Column( name = "date_updated")
+    @Column(name = "date_updated")
     private Date dateUpdated;
 
-    @Column( name = "creation_person_id", nullable = false)
-    private Person creationPersonId;
+    @Column(name = "creation_person_id", nullable = false)
+    private Long creationPersonId;
+
 }
