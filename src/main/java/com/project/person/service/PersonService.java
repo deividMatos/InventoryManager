@@ -1,9 +1,13 @@
 package com.project.person.service;
 
-import com.project.model.Person;
-import com.project.person.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.project.model.Person;
+import com.project.person.repository.PersonRepository;
+
+import java.util.List;
+
 @Service
 public class PersonService {
 
@@ -14,13 +18,19 @@ public class PersonService {
         this.repository = repository;
     }
 
+    public Person create(Person person){
+        System.out.println(person.toString());
+        return repository.save(person);
+    }
+
     public Person getById(Long idPerson){
         return repository.findById(idPerson).get();
     }
-
-    public Person insert(Person person){
-        System.out.println(person.toString());
-        return repository.save (person);
+    public Person update(Person person){
+        return repository.save(person);
+    }
+    public void delete (Long idPerson){
+        repository.deleteById(idPerson);
     }
 
 }

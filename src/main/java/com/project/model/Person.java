@@ -10,7 +10,8 @@ import java.util.Date;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator= "generateId", strategy = GenerationType.SEQUENCE) //gerar id sequencial automatico
+    @SequenceGenerator(name="generateId",sequenceName = "personSequence")
     @Column(name = "ID", nullable = false)
     @JsonProperty("id")
     private Long id;

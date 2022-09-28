@@ -1,20 +1,16 @@
 package com.project.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.sql.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "product")
+@Table(name = "PRODUCT")
 public class Product {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(generator= "generateId", strategy = GenerationType.SEQUENCE) //gerar id sequencial automatico
+    @SequenceGenerator(name="generateId",sequenceName = "productSequence")
+    @Column(name = "id", nullable = false)
     @JsonProperty("id")
     private Long id;
 
@@ -23,19 +19,19 @@ public class Product {
     private String description;
 
     @Column( name = "unit_measurement")
-    @JsonProperty("unit_measurement")
+    @JsonProperty("unitMeasurement")
     private String unitMeasurement;
-    
+
     @Column( name = "date_creation")
-    @JsonProperty("date_creation")
+    @JsonProperty("dateCreation")
     private Date dateCreation;
 
     @Column( name = "date_updated")
-    @JsonProperty("date_updated")
+    @JsonProperty("dateUpdated")
     private Date dateUpdated;
 
     @Column( name = "person_creation_id", nullable = false)
-    @JsonProperty("person_creation_id")
+    @JsonProperty("personCreationId")
     private Long creationPersonId;
 
     @Override
@@ -43,10 +39,10 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", unit_measurement='" + unitMeasurement + '\'' +
-                ", date_creation='" + dateCreation + '\'' +
-                ", date_updated='" + dateUpdated + '\'' +
-                ", person_creation_id='" + creationPersonId + '\'' +
+                ", unitMeasurement='" + unitMeasurement + '\'' +
+                ", dateCreation='" + dateCreation + '\'' +
+                ", dateUpdated='" + dateUpdated + '\'' +
+                ", personCreationId='" + creationPersonId + '\'' +
                 '}';
     }
 }
