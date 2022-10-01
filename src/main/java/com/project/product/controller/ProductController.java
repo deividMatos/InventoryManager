@@ -14,7 +14,7 @@ public class ProductController {
    
     //valor em chaves é o valor que sera substutido na url (json)
     @GetMapping("/product/{idProduct}")
-    public Product getByID(@PathVariable("idProduct")long idProduct){    //indentifiCADOR DE VARIAVEL (pathvariable)
+    public Product getByID(@PathVariable("idProduct")long idProduct){ //indentificador DE VARIAVEL (pathvariable)
         Product response = productService.getById(idProduct);
         return response;
     }
