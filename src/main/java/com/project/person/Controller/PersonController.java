@@ -18,11 +18,11 @@ public class PersonController {
         return response;
     }
 
-    @PostMapping("/person/insert")
+    @PostMapping("/person")
     public Person create(@RequestBody final Person person) {
         return personService.create(person);
     }
-    @PutMapping("/person/update")
+    @PutMapping("/person")
     public Person update(@RequestBody Person person) {
         Person response = personService.update(person);
         return response;
