@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS person (
-    id           SERIAL PRIMARY KEY,
+    id           PRIMARY KEY auto_increment,
     first_name   VARCHAR NOT NULL,
     birth        DATE NOT NULL);
 
 CREATE TABLE IF NOT EXISTS product (
-    id                  SERIAL PRIMARY KEY,
+    id                  PRIMARY KEY auto_increment,
     description         VARCHAR(255) NOT NULL,
     unit_measurement    VARCHAR(255),
     date_creation       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS product (
             REFERENCES person(id));
 
 CREATE TABLE IF NOT EXISTS movement_type (
-    id                      SERIAL PRIMARY KEY,
+    id                      PRIMARY KEY auto_increment,
     description             VARCHAR(50) NOT NULL,
     date_creation           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_updated            TIMESTAMP,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS movement_type (
             REFERENCES person(id));
 
 CREATE TABLE IF NOT EXISTS movement (
-    id                   SERIAL PRIMARY KEY,
+    id                   PRIMARY KEY auto_increment,
     date_creation        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     quantity             INT NOT NULL,
     product_id           INT NOT NULL,

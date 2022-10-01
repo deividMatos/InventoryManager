@@ -1,10 +1,11 @@
 package com.project.person.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import com.project.model.Person;
 import com.project.person.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class PersonController {
@@ -12,18 +13,24 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping("/person/{idPerson}")
-    public Person getById(@PathVariable("idPerson") Long idPerson) {
-        return personService.getById(idPerson);
+    public Person getById(@PathVariable("idPerson") long idPerson) {
+        Person response = personService.getById(idPerson);
+        return response;
     }
 
-    @PostMapping("/person/insert")
-    @ResponseBody
-    public Person getPerson(@RequestBody final Person person) {
-        return personService.insert(person);
+    @PostMapping("/person")
+    public Person create(@RequestBody final Person person) {
+        return personService.create(person);
+    }
+    @PutMapping("/person")
+    public Person update(@RequestBody Person person) {
+        Person response = personService.update(person);
+        return response;
+    }
+    @DeleteMapping("/person/{idPerson}")
+        public void delete(@PathVariable("idPerson") long idPerson){
+       personService.delete(idPerson);
     }
 
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<Person> updateCustomer(@PathVariable String id, @RequestBody Person patch) {
-        return null;
-    }
+// TODO: adicionar get list
 }
