@@ -33,4 +33,7 @@ public class PersonService {
         repository.deleteById(idPerson);
     }
 
+    public List<Person> getAllPerson() {
+        return repository.findAll();
+    }
 }
