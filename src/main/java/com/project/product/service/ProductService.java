@@ -6,12 +6,14 @@ import org.springframework.stereotype.Service;
 import com.project.model.Product;
 import com.project.product.repository.ProductRepository;
 
+import java.util.List;
+
 @Service
 //criando a classe 
 public class ProductService {
-    
     @Autowired
     private final ProductRepository repository;
+
     //relacionando a service com a repository do produto
     public ProductService(ProductRepository repository) {
         this.repository = repository;
@@ -31,5 +33,8 @@ public class ProductService {
     }
     public void delete (Long idProduct){
          repository.deleteById(idProduct);
+    }
+    public List<Product> getAllProduct() {
+        return repository.findAll();
     }
 }
