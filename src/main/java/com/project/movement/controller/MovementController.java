@@ -30,7 +30,7 @@ public class MovementController {
         try {
             return movementService.insert(movement);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Modelo nao aceitavel", exception);
         }
     }
 
