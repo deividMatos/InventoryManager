@@ -45,7 +45,6 @@ public class MovementController {
 
     @DeleteMapping("/movement/{idMovement}")
     public void delete(@PathVariable("idMovement") Long idMovement) {
-
         try {
             movementService.deleteById(idMovement);
         } catch (NoSuchElementException exception) {
