@@ -9,7 +9,7 @@ public class Product {
 
     @Id
     @GeneratedValue(generator= "generateId", strategy = GenerationType.SEQUENCE) //gerar id sequencial automatico
-    @SequenceGenerator(name="generateId",sequenceName = "")
+    @SequenceGenerator(name="generateId",sequenceName = "productSequence")
     @Column(name = "id", nullable = false)
     @JsonProperty("id")
     private Long id;

@@ -12,6 +12,10 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    @GetMapping ("/person/list")
+    public List <Person> getAllPerson() {
+        return personService.getAllPerson();
+    }
     @GetMapping("/person/{idPerson}")
     public Person getById(@PathVariable("idPerson") long idPerson) {
         Person response = personService.getById(idPerson);
