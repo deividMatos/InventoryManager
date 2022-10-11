@@ -12,7 +12,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping ("/person")
+    @GetMapping ("/person/list")
     public List <Person> getAllPerson() {
         return personService.getAllPerson();
     }
