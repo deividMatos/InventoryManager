@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping ("/product")
+    @GetMapping ("/product/list")
     public List<Product> getAllProduct() {
         return productService.getAllProduct();
     }
@@ -56,14 +56,5 @@ public class ProductController {
     public void delete(@PathVariable("idProduct")long idProduct){
         productService.delete(idProduct);
     }
-//    @GetMapping("/product/list")
-//    public List<Product> getAll(){
-//        List<Product> produtos = productService.getAll();
-//        if(!produtos.isEmpty()){
-//            return produtos;
-//        }else{
-//            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
-//        }
-//    }
+
 }
-//TODO:adicionar get list
