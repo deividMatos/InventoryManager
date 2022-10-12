@@ -18,6 +18,10 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @GetMapping
+    public String hello() {
+        return "Hello Controller";
+    }
     @GetMapping ("/product/list")
     public List<Product> getAllProduct() {
         return productService.getAllProduct();
