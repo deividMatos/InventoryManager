@@ -1,10 +1,16 @@
 package com.project.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "PRODUCT")
+@Data
+@Builder
 public class Product {
 
     @Id
@@ -45,4 +51,5 @@ public class Product {
                 ", personCreationId='" + creationPersonId + '\'' +
                 '}';
     }
+    public static class ProductBuilder {};
 }
