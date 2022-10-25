@@ -27,7 +27,7 @@ public class MovementControllerTest {
     public void getByID_success() {
         when(service.getById(anyLong())).thenReturn(buildMovement());
         Movement response = controller.getById(1L);
-        assertNotEquals(null, response); // caso id seja null
+        assertNotEquals(null, response);
         assertEquals(1L, response.getId());
         assertEquals(1L, response.getCreationPersonId());
         assertEquals(1L, response.getProductId());
