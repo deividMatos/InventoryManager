@@ -9,8 +9,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -32,6 +34,19 @@ public class MovementTypeControllerTest {
         assertEquals(1L, response.getId());
         assertEquals("string test description", response.getDescription());
         assertEquals(1L, response.getCreationPersonId());
+    }
+
+    @Test
+    public void getByID_notFound() {
+        when(service.getById(anyLong())).thenThrow(NoSuchElementException.class);
+        Throwable response = assertThrows(
+                ResponseStatusException.class,
+                () -> controller.getById(1L),
+                "Tipo de Movimento nao Encontrado"
+        );
+        assertEquals(ResponseStatusException.class, response.getClass());
+        assertNotEquals(NoSuchElementException.class, response.getClass());
+        assertEquals("404 NOT_FOUND \"Tipo de movimento nao encontrado\"", response.getMessage());
     }
 
     public MovementType buildMovementType() {
