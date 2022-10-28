@@ -49,6 +49,19 @@ public class MovementTypeControllerTest {
         assertEquals("404 NOT_FOUND \"Tipo de movimento nao encontrado\"", response.getMessage());
     }
 
+    @Test
+    public void getByID_genericException() {
+        when(service.getById(anyLong())).thenThrow(new RuntimeException("Cannot process"));
+        Throwable thrown = assertThrows(
+                ResponseStatusException.class,
+                () -> controller.getById(1L)
+        );
+        System.out.println(thrown);
+        assertEquals(ResponseStatusException.class, thrown.getClass());
+        assertNotEquals(NoSuchElementException.class, thrown.getClass());
+        assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", thrown.getMessage());
+    }
+
     public MovementType buildMovementType() {
         return MovementType.builder()
                 .id(1L)
