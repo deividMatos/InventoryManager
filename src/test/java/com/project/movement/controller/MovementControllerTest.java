@@ -38,15 +38,28 @@ public class MovementControllerTest {
     @Test
     public void getByID_notFound() {
         when(service.getById(anyLong())).thenThrow(NoSuchElementException.class);
-        Throwable throwable = assertThrows(
+        Throwable response = assertThrows(
                 ResponseStatusException.class,
                 () -> controller.getById(1L),
                 "Movimento nao encontrado"
         );
+        System.out.println(response);
+        assertEquals(ResponseStatusException.class, response.getClass());
+        assertNotEquals(NoSuchElementException.class, response.getClass());
+        assertEquals("404 NOT_FOUND \"Produto nao encontrado\"", response.getMessage());
+    }
+
+    @Test
+    public void getByID_genericException() {
+        when(service.getById(anyLong())).thenThrow(new RuntimeException());
+        Throwable throwable = assertThrows(
+                ResponseStatusException.class,
+                () -> controller.getById(1L)
+        );
         System.out.println(throwable);
         assertEquals(ResponseStatusException.class, throwable.getClass());
-        assertNotEquals(NoSuchElementException.class, throwable.getClass());
-        assertEquals("404 NOT_FOUND \"Produto nao encontrado\"", throwable.getMessage());
+        assertNotEquals(ResponseStatusException.class, throwable.getClass());
+        assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", throwable.getMessage());
     }
 
     public Movement buildMovement() {
