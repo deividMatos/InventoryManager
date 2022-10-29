@@ -46,7 +46,7 @@ public class MovementControllerTest {
         System.out.println(response);
         assertEquals(ResponseStatusException.class, response.getClass());
         assertNotEquals(NoSuchElementException.class, response.getClass());
-        assertEquals("404 NOT_FOUND \"Produto nao encontrado\"", response.getMessage());
+        assertEquals("404 NOT_FOUND \"Movimento nao encontrado\"", response.getMessage());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class MovementControllerTest {
         );
         System.out.println(throwable);
         assertEquals(ResponseStatusException.class, throwable.getClass());
-        assertNotEquals(ResponseStatusException.class, throwable.getClass());
+        assertNotEquals(RuntimeException.class, throwable.getClass());
         assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", throwable.getMessage());
     }
 
