@@ -3,6 +3,7 @@ package com.project.movementType.Controller;
 import com.project.model.MovementType;
 import com.project.movementType.Service.MovementTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
