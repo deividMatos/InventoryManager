@@ -52,7 +52,7 @@ public class MovementTypeController {
     public void delete(@PathVariable("id") Long id) {
         try {
             movementTypeService.delete(id);
-        } catch (NoSuchElementException exception) {
+        } catch (EmptyResultDataAccessException exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ID Movement Type nao encontrado", exception);
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
