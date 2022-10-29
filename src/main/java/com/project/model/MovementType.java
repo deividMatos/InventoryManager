@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "movement_type")

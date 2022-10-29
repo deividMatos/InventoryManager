@@ -3,7 +3,6 @@ package com.project.movementType.controller;
 import com.project.model.MovementType;
 import com.project.movementType.Controller.MovementTypeController;
 import com.project.movementType.Service.MovementTypeService;
-import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -46,7 +45,7 @@ public class MovementTypeControllerTest {
         );
         assertEquals(ResponseStatusException.class, response.getClass());
         assertNotEquals(NoSuchElementException.class, response.getClass());
-        assertEquals("404 NOT_FOUND \"Tipo de movimento nao encontrado\"", response.getMessage());
+        assertEquals("404 NOT_FOUND \"MovementType nao encontrado\"", response.getMessage());
     }
 
     @Test
@@ -66,7 +65,7 @@ public class MovementTypeControllerTest {
         return MovementType.builder()
                 .id(1L)
                 .description("string test description")
-                .dateUpdated((java.sql.Date) new Date())
+                .dateUpdated(new Date())
                 .creationPersonId(1L)
                 .build();
     }
