@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 public class PersonControllerTest {
     @InjectMocks PersonController controller;
     @Mock PersonService service;
-//----------------------TEST GET BY ID------------------------------
+    //----------------------TEST GET BY ID------------------------------
     @Test
     public void getByID_success() {
         when(service.getById(anyLong())).thenReturn(buildPerson());
@@ -56,7 +56,7 @@ public class PersonControllerTest {
         assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", thrown.getMessage());
 
     }
-//----------------------------TEST CREATE-------------------------------------
+    //----------------------------TEST CREATE-------------------------------------
     @Test
     public void create_Success(){
         when(service.create(any())).thenReturn(buildPerson());
@@ -76,7 +76,7 @@ public class PersonControllerTest {
         assertNotEquals(NoSuchElementException.class, thrown.getClass());
         assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", thrown.getMessage());
     }
-//----------------------------TEST UPDATE-------------------------------------
+    //----------------------------TEST UPDATE-------------------------------------
     @Test
     public void update_success(){
         when(service.update(any())).thenReturn(buildPerson());
@@ -96,23 +96,23 @@ public class PersonControllerTest {
         assertNotEquals(NoSuchElementException.class, excessao.getClass());
         assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", excessao.getMessage());
     }
-//----------------------------TEST DELETE-------------------------------------
-   @Test
-   public void delete_success(){
+    //----------------------------TEST DELETE-------------------------------------
+    @Test
+    public void delete_success(){
         doNothing().when(service).delete(anyLong());
         controller.delete(buildPerson().getId());
         verify(service,times(1)).delete(anyLong());
-   }
-   @Test
-   public void delete_genericException(){
+    }
+    @Test
+    public void delete_genericException(){
         doThrow(RuntimeException.class).when(service).delete(anyLong());
         Throwable excessao = assertThrows(
-               ResponseStatusException.class,
-               ()->controller.delete(buildPerson().getId())
-       );
+                ResponseStatusException.class,
+                ()->controller.delete(buildPerson().getId())
+        );
         assertEquals(ResponseStatusException.class, excessao.getClass());
-       assertNotEquals(NoSuchElementException.class, excessao.getClass());
-       assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", excessao.getMessage());
+        assertNotEquals(NoSuchElementException.class, excessao.getClass());
+        assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", excessao.getMessage());
     }
     @Test
     public void delete_notFound(){
@@ -125,7 +125,7 @@ public class PersonControllerTest {
         assertNotEquals(Exception.class, excessao.getClass());
         assertEquals("404 NOT_FOUND \"Produto nao encontrado\"", excessao.getMessage());
     }
-//-----------------------------------------BUILD-----------------------------------------------
+    //-----------------------------------------BUILD-----------------------------------------------
     public Person buildPerson() {
         return Person.builder()
                 .id(1L)
