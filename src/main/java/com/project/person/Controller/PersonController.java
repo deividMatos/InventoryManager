@@ -26,7 +26,7 @@ public class PersonController {
         try {
             return personService.getById(idPerson);
         } catch (NoSuchElementException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nao encontrado", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao foi encontrado", exception);
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
         }
