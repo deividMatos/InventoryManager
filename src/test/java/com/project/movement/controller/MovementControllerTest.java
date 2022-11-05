@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
+import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -112,13 +113,36 @@ public class MovementControllerTest {
         assertEquals("406 NOT_ACCEPTABLE \"Modelo nao aceitavel\"", throwable.getMessage());
     }
 
-//    @Test
-//    public void deleteByID_success() {
-//        when(service.deleteById(anyLong())).thenThrow(HttpStatus.OK);
-//        Movement response = controller.delete(1L);
-//        assertNotEquals(null, response);
-//        assertEquals(1L, response);
-//    }
+    @Test
+    public void deleteByID_success() {
+        doNothing().when(service).deleteById(anyLong());
+        controller.delete(1L);
+        verify(service, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void deleteByID_notFound() {
+        doThrow(NoSuchElementException.class).when(service).deleteById(anyLong());
+        Throwable throwable = assertThrows(
+                ResponseStatusException.class,
+                () -> controller.delete(anyLong())
+        );
+        assertEquals(ResponseStatusException.class, throwable.getClass());
+        assertNotEquals(NoSuchElementException.class, throwable.getClass());
+        assertEquals("404 NOT_FOUND \"Id nao encontrado\"", throwable.getMessage());
+    }
+
+    @Test
+    public void deleteByID_badRequest() {
+        doThrow(RuntimeException.class).when(service).deleteById(anyLong());
+        Throwable throwable = assertThrows(
+                ResponseStatusException.class,
+                () -> controller.delete(anyLong())
+        );
+        assertEquals(ResponseStatusException.class, throwable.getClass());
+        assertNotEquals(Exception.class, throwable.getClass());
+        assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", throwable.getMessage());
+    }
 
 
     public Movement buildMovement() {
