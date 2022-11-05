@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.model.Person;
 import com.project.person.repository.PersonRepository;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -27,7 +28,11 @@ public class PersonService {
         return repository.findById(idPerson).get();
     }
     public Person update(Person person){
-        return repository.save(person);
+        if(repository.existsById(person.getId())){
+            return repository.save(person);
+        }else{
+            throw new NotFoundException("Person not found");
+        }
     }
     public void delete (Long idPerson){
         repository.deleteById(idPerson);

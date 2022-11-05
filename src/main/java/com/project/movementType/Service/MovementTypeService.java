@@ -4,6 +4,7 @@ import com.project.model.MovementType;
 import com.project.movementType.Repository.MovementTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 @Service
 public class MovementTypeService {
@@ -23,7 +24,11 @@ public class MovementTypeService {
     }
 
     public MovementType update(MovementType movementType) {
-        return repository.save(movementType);
+        if(repository.existsById(movementType.getId())){
+            return repository.save(movementType);
+        }else{
+            throw new NotFoundException("MovementType not found");
+        }
     }
 
     public void delete(Long id) {

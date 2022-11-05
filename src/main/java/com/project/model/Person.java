@@ -3,11 +3,13 @@ package com.project.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "PERSON")
+@Data
 public class Person {
 
     @Id
