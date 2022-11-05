@@ -28,7 +28,7 @@ public class PersonService {
         return repository.findById(idPerson).get();
     }
     public Person update(Person person){
-        if(!repository.existsById(person.getId())){
+        if(repository.existsById(person.getId())){
             return repository.save(person);
         }else{
             throw new NotFoundException("Person not found");

@@ -23,7 +23,7 @@ public class MovementService {
     }
 
     public Movement update(Movement movement) {
-        if(!repository.existsById(movement.getId())){
+        if(repository.existsById(movement.getId())){
             return repository.save(movement);
         }else{
             throw new NotFoundException("Movement not found");

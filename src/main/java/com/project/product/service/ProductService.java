@@ -30,7 +30,7 @@ public class ProductService {
     }
 
     public Product update (Product product){
-        if(!repository.existsById(product.getId())){
+        if(repository.existsById(product.getId())){
             return repository.save(product);
         }else{
             throw new NotFoundException("Product not found");

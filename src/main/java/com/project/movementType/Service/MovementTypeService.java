@@ -24,7 +24,7 @@ public class MovementTypeService {
     }
 
     public MovementType update(MovementType movementType) {
-        if(!repository.existsById(movementType.getId())){
+        if(repository.existsById(movementType.getId())){
             return repository.save(movementType);
         }else{
             throw new NotFoundException("MovementType not found");
