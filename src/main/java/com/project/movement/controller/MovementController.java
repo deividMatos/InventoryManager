@@ -44,7 +44,7 @@ public class MovementController {
     }
 
     @DeleteMapping("/movement/{idMovement}")
-    public void delete(@PathVariable("idMovement") Long idMovement) {
+    public Movement delete(@PathVariable("idMovement") Long idMovement) {
         try {
             movementService.deleteById(idMovement);
         } catch (NoSuchElementException exception) {
@@ -52,5 +52,6 @@ public class MovementController {
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
         }
+        return null;
     }
 }
