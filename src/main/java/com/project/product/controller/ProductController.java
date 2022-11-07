@@ -3,6 +3,7 @@ package com.project.product.controller;
 
 import com.project.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.project.model.Product;
@@ -51,14 +52,23 @@ public class ProductController {
 
     @PutMapping ("/product")
     public Product update(@RequestBody Product product){
-        Product response = productService.update(product);
-        return response;
+        try {
+            Product response = productService.update(product);
+            return response;
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+        }
     }
   
 
     @DeleteMapping("/product/{idProduct}")
     public void delete(@PathVariable("idProduct")long idProduct){
-        productService.delete(idProduct);
+        try{
+            productService.delete(idProduct);
+        } catch (EmptyResultDataAccessException exception){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nao encontrado", exception);
+        }catch(Exception exception){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Problema na requisicao", exception);
+        }
     }
-
 }
