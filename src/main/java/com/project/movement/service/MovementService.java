@@ -5,6 +5,7 @@ import com.project.movement.repository.MovementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 @Service
 public class MovementService {
@@ -22,7 +23,11 @@ public class MovementService {
     }
 
     public Movement update(Movement movement) {
-        return repository.save(movement);
+        if(repository.existsById(movement.getId())){
+            return repository.save(movement);
+        }else{
+            throw new NotFoundException("Movement not found");
+        }
     }
 
     public void deleteById(Long id) {

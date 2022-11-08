@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.model.Product;
 import com.project.product.repository.ProductRepository;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -29,7 +30,11 @@ public class ProductService {
     }
 
     public Product update (Product product){
-        return repository.save(product);
+        if(repository.existsById(product.getId())){
+            return repository.save(product);
+        }else{
+            throw new NotFoundException("Product not found");
+        }
     }
     public void delete (Long idProduct){
          repository.deleteById(idProduct);
