@@ -16,8 +16,8 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -50,22 +50,24 @@ public class MovementServiceTest {
         assertEquals(2L, response.getQuantity());
     }
 
-//    @Test
-//    public void update_if_id_exists() {
-//        when(repository.existsById(1L)).thenReturn(true);
-//        Movement response = service.update(buildMovement());
-//        assertNotEquals(false, response);
-//    }
+    @Test
+    public void update_if_id_exists() {
+        when(repository.existsById(1L)).thenReturn(true);
+        Movement response = service.update(buildMovement());
+        assertNotEquals(false, response);
+    }
 
 //    @Test
 //    public void update_exception() {
 //        when(repository.existsById(123L)).thenThrow(new NotFoundException("Movement not found"));
 //    }
 
-//    @Test
-//    public void delete() {
-//        when(repository.deleteById());
-//    }
+    @Test
+    public void delete() {
+        doNothing().when(repository).deleteById(anyLong());
+        service.deleteById(1L);
+        verify(repository, times(1)).deleteById(anyLong());
+    }
 
     public Movement buildMovement() {
         return Movement.builder()
