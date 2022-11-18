@@ -61,6 +61,41 @@ public class MovementTypeControllerTest {
         assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", thrown.getMessage());
     }
 
+    @Test
+    public void insert_success() {
+
+    }
+
+    @Test
+    public void insert_genericException() {
+
+    }
+
+    @Test
+    public void update_success() {
+
+    }
+
+    @Test
+    public void update_genericException() {
+
+    }
+
+    @Test
+    public void delete_success() {
+
+    }
+
+    @Test
+    public void delete_NotFound() {
+
+    }
+
+    @Test
+    public void delete_BadRequest() {
+
+    }
+
     public MovementType buildMovementType() {
         return MovementType.builder()
                 .id(1L)
