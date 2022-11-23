@@ -11,7 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,6 +57,18 @@ public class PersonControllerTest {
         assertNotEquals(NoSuchElementException.class, thrown.getClass());
         assertEquals("400 BAD_REQUEST \"Problema na requisicao\"", thrown.getMessage());
 
+    }
+    //----------------------------TEST GET ALL------------------------------------
+    @Test
+    public void getAll_success() {
+        //criar o array que recece o build
+        ArrayList<Person> lista = new ArrayList<>();
+        //adicionar o buid na lista
+        lista.add(buildPerson());
+        when(service.getAllPerson()).thenReturn(lista);
+        List<Person> response= controller.getAllPerson();
+        assertNotEquals(null, response);
+        assertEquals (1L,response.get(0).getId());
     }
     //----------------------------TEST CREATE-------------------------------------
     @Test
