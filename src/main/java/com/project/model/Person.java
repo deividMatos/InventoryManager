@@ -12,6 +12,7 @@ import java.util.Date;
 @Table(name = "PERSON")
 @Data
 @Builder
+
 public class Person {
 
     @Id
