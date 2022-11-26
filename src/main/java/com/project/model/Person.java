@@ -3,6 +3,7 @@ package com.project.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,6 +11,8 @@ import java.util.Date;
 @Entity
 @Table(name = "PERSON")
 @Data
+@Builder
+
 public class Person {
 
     @Id
@@ -36,4 +39,5 @@ public class Person {
                 ", birth='" + birth + '\'' +
                 '}';
     }
+    public static class PersonBuilder {};
 }
