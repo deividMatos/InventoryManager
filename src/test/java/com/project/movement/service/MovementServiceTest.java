@@ -57,10 +57,18 @@ public class MovementServiceTest {
         assertNotEquals(false, response);
     }
 
-//    @Test
-//    public void update_exception() {
-//        when(repository.existsById(123L)).thenThrow(new NotFoundException("Movement not found"));
-//    }
+    @Test
+    public void update_exception() {
+        Movement build = buildMovement();
+        when(repository.existsById(anyLong())).thenReturn(false);
+        Throwable throwable = assertThrows(
+                NotFoundException.class,
+                () -> service.update(build)
+        );
+        assertEquals(NotFoundException.class, throwable.getClass());
+        assertNotEquals(RuntimeException.class, throwable.getClass());
+        assertEquals("Movement not found", throwable.getMessage());
+    }
 
     @Test
     public void delete() {
