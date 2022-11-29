@@ -2,7 +2,9 @@ package com.project.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,7 +14,7 @@ import java.util.Date;
 @Table(name = "PERSON")
 @Data
 @Builder
-
+@AllArgsConstructor
 public class Person {
 
     @Id
@@ -29,6 +31,9 @@ public class Person {
     @Column(name = "BIRTH")
     @JsonProperty("birth")
     private Date birth;
+
+    public Person() {
+    }
 
 
     @Override
