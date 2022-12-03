@@ -7,6 +7,7 @@ import com.project.model.Product;
 import com.project.product.repository.ProductRepository;
 import org.webjars.NotFoundException;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 
 @Service
@@ -21,8 +22,11 @@ public class ProductService {
     }
 
     public Product create(Product product){
-        System.out.println(product.toString());
-        return repository.save(product);
+        if(!repository.existsById(product.getId()))
+            return repository.save(product);
+        else{
+            throw new EntityExistsException("product already exists");
+        }
     }
 
     public Product getById(Long idProduct){
