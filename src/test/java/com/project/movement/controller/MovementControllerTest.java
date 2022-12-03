@@ -2,6 +2,7 @@ package com.project.movement.controller;
 
 import com.project.model.Movement;
 import com.project.movement.service.MovementService;
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Date;
 import java.util.NoSuchElementException;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -47,6 +49,7 @@ public class MovementControllerTest {
         assertEquals(ResponseStatusException.class, response.getClass());
         assertNotEquals(NoSuchElementException.class, response.getClass());
         assertEquals("404 NOT_FOUND \"Movimento nao encontrado\"", response.getMessage());
+        assertThat(response.getMessage(), CoreMatchers.containsString("404 NOT_FOUND"));
     }
 
     @Test

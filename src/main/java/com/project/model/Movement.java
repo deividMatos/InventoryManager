@@ -1,10 +1,9 @@
 package com.project.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,6 +13,7 @@ import java.sql.Date;
 @Table(name = "movement")
 @Data
 @Builder
+@AllArgsConstructor
 public class Movement {
     @Id
     @Column(name = "id")
@@ -39,6 +39,9 @@ public class Movement {
     @Column( name = "movement_type_id", nullable = false)
     @JsonProperty("movement_type_id")
     private Long movementTypeId;
+
+    public Movement() {
+    }
 
     @Override
     public String toString() {

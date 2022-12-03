@@ -26,9 +26,9 @@ public class PersonController {
         try {
             return personService.getById(idPerson);
         } catch (NoSuchElementException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao foi encontrado", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao foi encontrado");
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
 
@@ -37,7 +37,7 @@ public class PersonController {
         try {
             return personService.create(person);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
     @PutMapping("/person")
@@ -45,7 +45,7 @@ public class PersonController {
         try {
             return personService.update(person);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
     @DeleteMapping("/person/{idPerson}")
@@ -53,9 +53,9 @@ public class PersonController {
         try {
             personService.delete(idPerson);
         } catch (EmptyResultDataAccessException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nao encontrado", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nao encontrado");
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
 

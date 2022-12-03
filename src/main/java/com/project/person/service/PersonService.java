@@ -7,6 +7,7 @@ import com.project.model.Person;
 import com.project.person.repository.PersonRepository;
 import org.webjars.NotFoundException;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 
 @Service
@@ -20,8 +21,11 @@ public class PersonService {
     }
 
     public Person create(Person person){
-        System.out.println(person.toString());
-        return repository.save(person);
+        if(!repository.existsById(person.getId()))
+            return repository.save(person);
+        else{
+            throw new EntityExistsException("person already exists");
+        }
     }
 
     public Person getById(Long idPerson){
