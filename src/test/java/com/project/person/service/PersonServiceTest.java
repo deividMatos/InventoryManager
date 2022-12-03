@@ -9,7 +9,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.server.ResponseStatusException;
+import org.webjars.NotFoundException;
 
+import javax.persistence.EntityExistsException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -38,21 +40,10 @@ public class PersonServiceTest {
         when(repository.findById(anyLong())).thenThrow(NoSuchElementException.class);
         Throwable response= assertThrows(
                 NoSuchElementException.class,
-                ()-> service.getById(1L),
-                "Usuario nao foi encontrado"
+                ()-> service.getById(1L)
         );
         assertEquals(NoSuchElementException.class,response.getClass());
         assertNotEquals(ResponseStatusException.class, response.getClass());
-    }
-    @Test
-    public void getByID_genericException() {
-        when(repository.existsById(anyLong())).thenThrow(new RuntimeException("Cannot process"));
-        Throwable thrown = assertThrows(
-                ResponseStatusException.class,
-                () -> service.getById(1L)
-        );
-        assertEquals(ResponseStatusException.class, thrown.getClass());
-        assertNotEquals(NoSuchElementException.class, thrown.getClass());
     }
     //----------------------------TEST GET ALL------------------------------------
     @Test
@@ -74,12 +65,15 @@ public class PersonServiceTest {
         assertEquals("person", response.getFirstName());
     }
     @Test
-    public void create_genericException() {
-        when(repository.save(any(Person.class))).thenThrow(RuntimeException.class);
-        Throwable thrown = assertThrows(
-                ResponseStatusException.class,
+    public void create_allreadyExistsException() {
+        //verifica se existe e retona que sim, existe.
+        when(repository.existsById(anyLong())).thenReturn(Boolean.TRUE);
+        Throwable excessao = assertThrows(
+                EntityExistsException.class,
                 () -> service.create((buildPerson()))
         );
+        assertEquals(EntityExistsException.class, excessao.getClass());
+        assertEquals("person already exists", excessao.getMessage());
     }
     //----------------------------TEST UPDATE-------------------------------------
     @Test
@@ -93,14 +87,14 @@ public class PersonServiceTest {
         assertEquals("person", response.getFirstName());
     }
     @Test
-    public void update_genericException() {
-        when(repository.existsById(any())).thenThrow(RuntimeException.class);
+    public void update_genericNotFound() {
+        when(repository.existsById(any())).thenReturn(Boolean.FALSE);
         Throwable excessao = assertThrows(
-                ResponseStatusException.class,
+                NotFoundException.class,
                 () -> service.update((buildPerson()))
         );
-        assertEquals(ResponseStatusException.class, excessao.getClass());
-        assertNotEquals(NoSuchElementException.class, excessao.getClass());
+        assertEquals(NotFoundException.class, excessao.getClass());
+        assertEquals("Person not found", excessao.getMessage());
     }
     //----------------------------TEST DELETE-------------------------------------
     @Test
@@ -110,16 +104,6 @@ public class PersonServiceTest {
         verify(repository,times(1)).deleteById(anyLong());
     }
     @Test
-    public void delete_genericException(){
-        doThrow(RuntimeException.class).when(repository).deleteById(anyLong());
-        Throwable excessao = assertThrows(
-                RuntimeException.class,
-                ()->service.delete(buildPerson().getId())
-        );
-        assertEquals(ResponseStatusException.class, excessao.getClass());
-        assertNotEquals(NoSuchElementException.class, excessao.getClass());
-    }
-    @Test
     public void delete_notFound(){
         doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(anyLong());
         Throwable excessao = assertThrows(
@@ -127,7 +111,7 @@ public class PersonServiceTest {
                 ()->service.delete(buildPerson().getId())
         );
         assertEquals(EmptyResultDataAccessException.class, excessao.getClass());
-        //assertNotEquals(ResponseStatusException.class, excessao.getClass());
+
     }
     //-----------------------------------------BUILD-----------------------------------------------
   public Person buildPerson() {

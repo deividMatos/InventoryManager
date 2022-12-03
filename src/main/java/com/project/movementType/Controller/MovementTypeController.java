@@ -23,9 +23,9 @@ public class MovementTypeController {
         try {
             return movementTypeService.getById(id);
         } catch (NoSuchElementException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "MovementType nao encontrado", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "MovementType nao encontrado");
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
 
@@ -35,7 +35,7 @@ public class MovementTypeController {
         try {
             return movementTypeService.insert(movementType);
         } catch (Exception exception) { // pensei em usar o (InvalidPropertiesFormatException exeption) pq na descrição do erro fala que as entradas são invalidas, estaria correto colocar? Daí eu teria que alterar no Movement e padronizar
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Entrada inválida", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Entrada inválida");
         }
     }
 
@@ -54,9 +54,9 @@ public class MovementTypeController {
         try {
             movementTypeService.delete(id);
         } catch (EmptyResultDataAccessException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ID Movement Type nao encontrado", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ID Movement Type nao encontrado");
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
 }
