@@ -19,9 +19,9 @@ public class MovementController {
         try {
             return movementService.getById(idMovement);
         } catch (NoSuchElementException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Movimento nao encontrado", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Movimento nao encontrado");
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
 
@@ -30,7 +30,7 @@ public class MovementController {
         try {
             return movementService.insert(movement);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Modelo nao aceitavel", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Modelo nao aceitavel");
         }
     }
 
@@ -39,7 +39,7 @@ public class MovementController {
         try {
             return movementService.update(movement);
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Modelo nao aceitavel", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Modelo nao aceitavel");
         }
     }
 
@@ -48,9 +48,9 @@ public class MovementController {
         try {
             movementService.deleteById(idMovement);
         } catch (NoSuchElementException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Id nao encontrado", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Id nao encontrado");
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
 }

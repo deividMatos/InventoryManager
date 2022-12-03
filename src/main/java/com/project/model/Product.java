@@ -1,7 +1,9 @@
 package com.project.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,6 +13,7 @@ import java.util.Date;
 @Table(name = "PRODUCT")
 @Data
 @Builder
+@AllArgsConstructor
 public class Product {
 
     @Id
@@ -40,6 +43,9 @@ public class Product {
     @JsonProperty("personCreationId")
     private Long creationPersonId;
 
+    public Product() {
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -51,5 +57,4 @@ public class Product {
                 ", personCreationId='" + creationPersonId + '\'' +
                 '}';
     }
-    public static class ProductBuilder {};
 }

@@ -33,9 +33,9 @@ public class ProductController {
         try {
             return productService.getById(idProduct);
         } catch (NoSuchElementException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nao encontrado", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nao encontrado");
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
 
     }
@@ -46,7 +46,7 @@ public class ProductController {
             Product response = productService.create(product);
             return response;
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
 
@@ -56,7 +56,7 @@ public class ProductController {
             Product response = productService.update(product);
             return response;
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Problema na requisicao");
         }
     }
   
@@ -66,9 +66,9 @@ public class ProductController {
         try{
             productService.delete(idProduct);
         } catch (EmptyResultDataAccessException exception){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nao encontrado", exception);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nao encontrado");
         }catch(Exception exception){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Problema na requisicao", exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Problema na requisicao");
         }
     }
 }
